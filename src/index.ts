@@ -13,8 +13,9 @@ const config: any = {
     autoCenter: Phaser.Scale.CENTER_BOTH,
     parent: 'app',
     width: 750,
-    height: 1000
+    height: 1334
   },
+  autoRound: true,
   scene
 }
 

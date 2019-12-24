@@ -4,6 +4,16 @@ export default class BootScene extends Phaser.Scene {
     super('BootScene')
   }
 
+  init() {
+    const designSize: any = this.sys.game.config // 750 1334 *
+    const boundsSize = this.scale.canvasBounds // 456 812 -41
+    window.boundsXY = {
+      x: (designSize.width / boundsSize.width) * -boundsSize.x,
+      y: (designSize.height / boundsSize.height) * -boundsSize.y
+    }
+
+  }
+
   preload() {
     // this.load.setBaseURL(BASE_URL)
     // this.load.setPath(PATH_URL)

@@ -9,6 +9,10 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.setPath(PATH_URL)
     this.load.image('bg', 'images/bg.jpg')
     this.load.image('home_box', 'images/home_box.png')
+    this.load.image('home_bottom', 'images/home_bottom.png')
+    this.load.image('home_number1', 'images/home_number1.png')
+    this.load.image('home_number2', 'images/home_number2.png')
+    this.load.image('bird', 'images/bird.png')
   }
 
   create() {
