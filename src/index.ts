@@ -7,15 +7,15 @@ for (let i in scenes) {
 
 const config: any = {
   type: Phaser.AUTO,
-  backgroundColor: 0x000000,
-  parent: null,
+  transparent: true,
   scale: {
-    mode: Phaser.Scale.FIT,
+    mode: Phaser.Scale.ENVELOP,
     autoCenter: Phaser.Scale.CENTER_BOTH,
+    parent: 'app',
     width: 750,
-    height: 1334
+    height: 1000
   },
   scene
 }
 
-window.game = new Phaser.Game(config)
+new Phaser.Game(config)
