@@ -17,8 +17,10 @@ export default class BootScene extends Phaser.Scene {
       y: boundsScale.scaleY * -boundsSize.y,
       boundsSize,
       parentSize,
-      scaleX: parentSize.width / boundsSize.width,
-      scaleY: parentSize.height / boundsSize.height,
+      scale: Math.min(
+        parentSize.width / boundsSize.width,
+        parentSize.height / boundsSize.height
+      ),
       container: {
         width: boundsScale.scaleX * parentSize.width,
         height: boundsScale.scaleY * parentSize.height

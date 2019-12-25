@@ -3,7 +3,6 @@ export default class HomeScene extends Phaser.Scene {
   config: any
   adapter: any
   container: any
-  zone: any
   constructor() {
     super('HomeScene')
   }
@@ -11,13 +10,6 @@ export default class HomeScene extends Phaser.Scene {
   init() {
     this.config = this.sys.game.config
     this.adapter = this.sys.game.adapter
-    // this.zone = this.add
-    //   .zone(
-    //     this.config.width / 2,
-    //     this.config.height / 2,
-    //     400,
-    //     400
-    //   )
     this.container = this.add
       .container(this.adapter.x, this.adapter.y)
       .setSize(this.adapter.container.width, this.adapter.container.height)
@@ -25,9 +17,22 @@ export default class HomeScene extends Phaser.Scene {
   }
 
   create() {
-    // console.log(this.adapter.x, this.adapter.y)
-    // this.add.image(0, 0, 'bg').setOrigin(0)
+    this.add.image(0, 0, 'bg').setOrigin(0)
 
+    const home_box = this.add
+      .image(0, 0, 'home_box')
+      .setOrigin(0.5, 0)
+      .setScale(this.adapter.scale)
+
+    const boxContainer = this.add.container(
+      this.config.width * 0.5,
+      0
+      // -home_box.height
+    )
+
+    boxContainer.add([home_box])
+
+    // this.container.add([home_box])
     // console.log(this.adapter, this.zone)
 
     // var graphics = this.add.graphics({ fillStyle: { color: 0x0000ff } });
