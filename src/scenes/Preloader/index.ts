@@ -13,6 +13,7 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('home_number1', 'images/home_number1.png')
     this.load.image('home_number2', 'images/home_number2.png')
     this.load.image('bird', 'images/bird.png')
+    this.load.image('test', 'images/test.png')
   }
 
   create() {

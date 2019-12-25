@@ -7,11 +7,23 @@ export default class BootScene extends Phaser.Scene {
   init() {
     const designSize: any = this.sys.game.config // 750 1334 *
     const boundsSize = this.scale.canvasBounds // 456 812 -41
-    window.boundsXY = {
-      x: (designSize.width / boundsSize.width) * -boundsSize.x,
-      y: (designSize.height / boundsSize.height) * -boundsSize.y
+    const parentSize = this.scale.parentSize
+    const boundsScale = {
+      scaleX: designSize.width / boundsSize.width,
+      scaleY: designSize.height / boundsSize.height
     }
-
+    this.sys.game.adapter = {
+      x: boundsScale.scaleX * -boundsSize.x,
+      y: boundsScale.scaleY * -boundsSize.y,
+      boundsSize,
+      parentSize,
+      scaleX: parentSize.width / boundsSize.width,
+      scaleY: parentSize.height / boundsSize.height,
+      container: {
+        width: boundsScale.scaleX * parentSize.width,
+        height: boundsScale.scaleY * parentSize.height
+      }
+    }
   }
 
   preload() {
