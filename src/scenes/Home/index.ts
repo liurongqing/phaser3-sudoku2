@@ -21,18 +21,24 @@ export default class HomeScene extends Phaser.Scene {
 
     const home_box = this.add
       .image(0, 0, 'home_box')
-      .setOrigin(0.5, 0)
       .setScale(this.adapter.scale)
+      .setOrigin(0.5, 0)
 
     const boxContainer = this.add.container(
-      this.config.width * 0.5,
+      this.container.width * 0.5,
       0
       // -home_box.height
     )
 
-    boxContainer.add([home_box])
+    const birdImage = this.add
+      .image(-this.container.width * 0.5, home_box.displayHeight + 50, 'bird')
+      .setOrigin(0, 1)
+      .setScale(this.adapter.scale)
 
-    // this.container.add([home_box])
+
+    boxContainer.add([home_box, birdImage])
+
+    this.container.add([boxContainer])
     // console.log(this.adapter, this.zone)
 
     // var graphics = this.add.graphics({ fillStyle: { color: 0x0000ff } });
