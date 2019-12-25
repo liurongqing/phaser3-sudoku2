@@ -127,6 +127,6 @@ export default class HomeScene extends Phaser.Scene {
     numberContainer.add([home_number1, home_number2])
     this.container.add([boxContainer, numberContainer])
 
-    this.scene.start('ListScene')
+    // this.scene.start('ListScene')
   }
 }
