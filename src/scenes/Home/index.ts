@@ -3,6 +3,7 @@ export default class HomeScene extends Phaser.Scene {
   config: any
   adapter: any
   container: any
+  zone: any
   constructor() {
     super('HomeScene')
   }
@@ -10,22 +11,35 @@ export default class HomeScene extends Phaser.Scene {
   init() {
     this.config = this.sys.game.config
     this.adapter = this.sys.game.adapter
+    // this.zone = this.add
+    //   .zone(
+    //     this.config.width / 2,
+    //     this.config.height / 2,
+    //     400,
+    //     400
+    //   )
     this.container = this.add
       .container(this.adapter.x, this.adapter.y)
       .setSize(this.adapter.container.width, this.adapter.container.height)
+      .setDepth(9)
   }
 
   create() {
+    // console.log(this.adapter.x, this.adapter.y)
     // this.add.image(0, 0, 'bg').setOrigin(0)
 
-    console.log(this.adapter)
+    // console.log(this.adapter, this.zone)
 
-    const test = this.add
-      .image(0, 0, 'test')
-      .setOrigin(0)
-      .setScale(Math.min(this.adapter.scaleX, this.adapter.scaleY))
+    // var graphics = this.add.graphics({ fillStyle: { color: 0x0000ff } });
+    // graphics.fillRectShape(this.zone);
 
-    this.container.add([test])
+    // const test = this.add.image(0, 0, 'test')
+    // // .setOrigin(0)
+    // // .setScale(Math.min(this.adapter.scaleX, this.adapter.scaleY))
+
+    // Phaser.Display.Align.In.Center(test, this.zone)
+
+    // this.container.add([test])
     // this.add.image(0, this.config.height, 'home_bottom').setOrigin(0, 1)
 
     // const home_box = this.add
