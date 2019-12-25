@@ -1,8 +1,8 @@
-import { BASE_URL, PATH_URL } from '@/const'
 export default class HomeScene extends Phaser.Scene {
   config: any
   adapter: any
   container: any
+
   constructor() {
     super('HomeScene')
   }
@@ -24,77 +24,109 @@ export default class HomeScene extends Phaser.Scene {
       .setScale(this.adapter.scale)
       .setOrigin(0.5, 0)
 
+    const text = this.add
+      .text(0, home_box.displayHeight * 0.25, '数独', {
+        fontSize: 130
+      })
+      .setOrigin(0.5, 0.5)
+
     const boxContainer = this.add.container(
       this.container.width * 0.5,
-      0
-      // -home_box.height
+      -home_box.displayHeight
     )
 
     const birdImage = this.add
-      .image(-this.container.width * 0.5, home_box.displayHeight + 50, 'bird')
+      .image(-this.container.width, home_box.displayHeight + 50, 'bird')
       .setOrigin(0, 1)
       .setScale(this.adapter.scale)
 
+    // 经典数独
+    const classicContainer = this.add.container(0, home_box.displayHeight * 0.5)
+    const classicButton = this.add.sprite(0, 0, 'green_button').setInteractive()
+    const classicText = this.add
+      .text(0, 0, '经典数独', {
+        fontSize: 46
+      })
+      .setOrigin(0.5)
 
-    boxContainer.add([home_box, birdImage])
+    // 我的数独
+    const customContainer = this.add.container(0, home_box.displayHeight * 0.7)
+    const customButton = this.add.sprite(0, 0, 'orange_button').setInteractive()
+    const customText = this.add
+      .text(0, 0, '我的数独', {
+        fontSize: 46
+      })
+      .setOrigin(0.5)
 
-    this.container.add([boxContainer])
-    // console.log(this.adapter, this.zone)
+    classicContainer.add([classicButton, classicText])
+    customContainer.add([customButton, customText])
 
-    // var graphics = this.add.graphics({ fillStyle: { color: 0x0000ff } });
-    // graphics.fillRectShape(this.zone);
+    boxContainer.add([
+      home_box,
+      birdImage,
+      text,
+      classicContainer,
+      customContainer
+    ])
 
-    // const test = this.add.image(0, 0, 'test')
-    // // .setOrigin(0)
-    // // .setScale(Math.min(this.adapter.scaleX, this.adapter.scaleY))
+    this.add.image(0, this.config.height, 'home_bottom').setOrigin(0, 1)
 
-    // Phaser.Display.Align.In.Center(test, this.zone)
+    this.tweens.add({
+      targets: boxContainer,
+      y: 0,
+      duration: 1200,
+      ease: 'Bounce.easeOut',
+      onComplete: () => {
+        this.tweens.add({
+          targets: birdImage,
+          x: -this.container.width * 0.5,
+          duration: 500,
+          ease: 'Quad.easeIn'
+        })
+      }
+    })
 
-    // this.container.add([test])
-    // this.add.image(0, this.config.height, 'home_bottom').setOrigin(0, 1)
+    const home_number1 = this.add
+      .image(-100, this.container.height * 0.5, 'home_number1')
+      .setOrigin(0.5, 1)
 
-    // const home_box = this.add
-    //   .image(0, 0, 'home_box')
-    //   .setOrigin(0.5, 0)
-    //   .setScale(this.adapter.scale)
+    const home_number2 = this.add
+      .image(this.container.width * 0.5, -120, 'home_number2')
+      .setOrigin(1)
 
-    // const container = this.add.container(
-    //   this.config.width * 0.5,
-    //   -home_box.height
-    // )
+    const numberContainer = this.add.container(
+      this.container.width * 0.5,
+      this.container.height * 0.5
+    )
 
-    // // console.log(home_box)
-    // // console.log(window.boundsXY)
-    // const birdImage = this.add.image(0, 0, 'bird').setOrigin(0)
-    // const xxContainer = this.add.container(
-    //   -this.config.width * 0.5 + window.boundsXY.x,
-    //   home_box.displayHeight - birdImage.height + 30
-    // )
-    // xxContainer.add(birdImage)
+    classicButton.once('pointerdown', () => {
+      this.tweens.add({
+        targets: classicContainer,
+        scale: 0.7,
+        duration: 100,
+        yoyo: true,
+        onComplete: () => {
+          // console.log('2...')
+          this.scene.start('ListScene')
+        }
+      })
+    })
 
-    // container.add([home_box, xxContainer])
-    // container.setDepth(100)
+    customButton.once('pointerdown', () => {
+      this.tweens.add({
+        targets: customContainer,
+        scale: 0.7,
+        duration: 100,
+        yoyo: true,
+        onComplete: () => {
+          console.log('2...')
+        }
+      })
+    })
 
-    // this.tweens.add({
-    //   targets: container,
-    //   y: window.boundsXY.y,
-    //   duration: 1500,
-    //   ease: 'Bounce.easeOut'
-    // } as any)
+    numberContainer.add([home_number1, home_number2])
+    this.container.add([boxContainer, numberContainer])
 
-    // this.add
-    //   .image(
-    //     200 + window.boundsXY.x,
-    //     this.config.height - window.boundsXY.y,
-    //     'home_number1'
-    //   )
-    //   .setOrigin(0.5, 1)
-    // this.add
-    //   .image(
-    //     this.config.width - window.boundsXY.x,
-    //     300 - window.boundsXY.y,
-    //     'home_number2'
-    //   )
-    //   .setOrigin(1, -1)
+    this.scene.start('ListScene')
   }
 }

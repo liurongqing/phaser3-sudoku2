@@ -13,7 +13,14 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('home_number1', 'images/home_number1.png')
     this.load.image('home_number2', 'images/home_number2.png')
     this.load.image('bird', 'images/bird.png')
-    this.load.image('test', 'images/test.png')
+    this.load.image('green_button', 'images/green_button.png')
+    this.load.image('orange_button', 'images/orange_button.png')
+    this.load.image('list_bg', 'images/list_bg.jpg')
+    this.load.image('list_tree_bottomleft', 'images/list_tree_bottomleft.png')
+    this.load.image('list_tree_bottomright', 'images/list_tree_bottomright.png')
+    this.load.image('list_tree_topright', 'images/list_tree_topright.png')
+    this.load.image('list_item', 'images/list_item.png')
+    // this.load.image('test', 'images/test.png')
   }
 
   create() {
